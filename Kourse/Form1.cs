@@ -62,6 +62,19 @@ namespace Kourse
 //Добавление DateRelation для связи двух таблиц и их объектов друг с другом
     DataRelation storeFirmRelation = new DataRelation("FK_Store_Firm",dataSet.Tables["Firm"].Columns["ID"],dataSet.Tables["Store"].Columns["ID"]);
     DataRelation productStoreRelation = new DataRelation("FK_Product_Store",dataSet.Tables["Store"].Columns["ID"], dataSet.Tables["Product"].Columns["StoreID"]);
+// Создание команд для адаптера
+            SqlCommand selectFirmCommand = new SqlCommand("SELECT * FROM Firm", connection);
+            SqlCommand selectStoreCommand = new SqlCommand("SELECT * FROM Store", connection);
+            SqlCommand selectProductCommand = new SqlCommand("SELECT * FROM Product", connection);
+
+            adapter.SelectCommand = selectFirmCommand;
+            adapter.Fill(dataSet, "Firm");
+
+            adapter.SelectCommand = selectStoreCommand;
+            adapter.Fill(dataSet, "Store");
+
+            adapter.SelectCommand = selectProductCommand;
+            adapter.Fill(dataSet, "Product");
 
 
     
