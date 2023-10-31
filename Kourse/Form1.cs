@@ -75,7 +75,20 @@ namespace Kourse
 
             adapter.SelectCommand = selectProductCommand;
             adapter.Fill(dataSet, "Product");
+// Создание команд для обновления данных
+            SqlCommandBuilder firmCommandBuilder = new SqlCommandBuilder(adapter);
+            SqlCommandBuilder storeCommandBuilder = new SqlCommandBuilder(adapter);
+            SqlCommandBuilder productCommandBuilder = new SqlCommandBuilder(adapter);
 
+            adapter.UpdateCommand = firmCommandBuilder.GetUpdateCommand();
+            adapter.Update(dataSet, "Firm");
+
+            adapter.UpdateCommand = storeCommandBuilder.GetUpdateCommand();
+            adapter.Update(dataSet, "Store");
+
+            adapter.UpdateCommand = productCommandBuilder.GetUpdateCommand();
+            adapter.Update(dataSet, "Product");
+        }
 
     
 }
