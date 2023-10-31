@@ -59,7 +59,7 @@ namespace Kourse
     dataSet.Tables.Add(firmTable);
     dataSet.Tables.Add(storeTable);
     dataSet.Tables.Add(productTable);
-
+//Добавление DateRelation для связи двух таблиц и их объектов друг с другом
     DataRelation storeFirmRelation = new DataRelation("FK_Store_Firm",dataSet.Tables["Firm"].Columns["ID"],dataSet.Tables["Store"].Columns["ID"]);
     DataRelation productStoreRelation = new DataRelation("FK_Product_Store",dataSet.Tables["Store"].Columns["ID"], dataSet.Tables["Product"].Columns["StoreID"]);
 
