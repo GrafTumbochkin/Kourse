@@ -96,6 +96,34 @@ private void LoadData()
             dgvStores.DataSource = dataSet.Tables["Store"];
             dgvProducts.DataSource = dataSet.Tables["Product"];
         }
+
+        private void btnGenerateReport_Click(object sender, EventArgs e)
+{
+    int storeID = Convert.ToInt32(txtStoreID.Text);
+    int firmID = Convert.ToInt32(txtFirmID.Text);
+
+    // Получение отчета на основе информации из БД
+    DataTable resultTable = new DataTable("Report");
+    resultTable.Columns.Add("ProductName", typeof(string));
+    resultTable.Columns.Add("Quantity", typeof(int));
+    resultTable.Columns.Add("Price", typeof(decimal));
+    resultTable.Columns.Add("TotalPrice", typeof(decimal));
+
+    DataRow[] productRows = dataSet.Tables["Product"].Select($"StoreID = {storeID}");
+    foreach (DataRow productRow in productRows)
+    {
+        DataRow[] firmRows = productRow.GetParentRows("FK_Product_Store");
+        if (firmRows.Length > 0 && Convert.ToInt32(firmRows[0]["ID"]) == firmID)
+        {
+            string productName = productRow["Name"].ToString();
+            int quantity = Convert.ToInt32(productRow["Quantity"]);
+            decimal price = Convert.ToDecimal(productRow["Price"]);
+            decimal totalPrice = quantity * price;
+
+            resultTable.Rows.Add(productName, quantity, price, totalPrice);
+        }
+    }
+}
     
 }
     }
