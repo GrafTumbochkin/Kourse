@@ -89,7 +89,13 @@ namespace Kourse
             adapter.UpdateCommand = productCommandBuilder.GetUpdateCommand();
             adapter.Update(dataSet, "Product");
         }
-
+private void LoadData()
+        {
+            // Загрузка данных в DataGridView
+            dgvFirms.DataSource = dataSet.Tables["Firm"];
+            dgvStores.DataSource = dataSet.Tables["Store"];
+            dgvProducts.DataSource = dataSet.Tables["Product"];
+        }
     
 }
     }
