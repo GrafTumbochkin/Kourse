@@ -25,9 +25,19 @@ namespace Kourse
         {
 
         }
-        static void main(string[] args)
-        {
-            Console.WriteLine("Hello World!");
-        }
+        private void InitializeDataSet()
+{
+    dataSet = new DataSet();
+//добавление параметров для таблицы Фирма
+    DataTable firmTable = new DataTable("Firm");
+    firmTable.Columns.Add("ID", typeof(int));
+    firmTable.Columns.Add("Name", typeof(string));
+    firmTable.Columns.Add("Phone", typeof(string));
+    firmTable.Columns.Add("Address", typeof(string));
+
+    
+   
+
+}
     }
 }
